@@ -1,0 +1,40 @@
+# ----------------------
+# Visual Studio / VSCode
+# ----------------------
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# ----------------------
+# Python virtual envs
+# ----------------------
+env/
+venv/
+.venv/
+ENV/
+
+# ----------------------
+# Python build artifacts
+# ----------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# ----------------------
+# OS junk
+# ----------------------
+.DS_Store
+Thumbs.db
+
+
+# Data
+example_data/
+synthetic_data/
+synthetic_data/*.tmp

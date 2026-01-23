@@ -1,0 +1,102 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>1193a2df-b0ab-4584-83ca-23761a20d6bf</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>mmai_synth.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>mmai-synth</Name>
+    <RootNamespace>mmai-synth</RootNamespace>
+    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <CommandLineArguments>
+    </CommandLineArguments>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="mmai\cli.py" />
+    <Compile Include="mmai\config.py" />
+    <Compile Include="mmai\eval\metrics.py" />
+    <Compile Include="mmai\eval\privacy.py" />
+    <Compile Include="mmai\eval\utility.py" />
+    <Compile Include="mmai\io\loaders.py" />
+    <Compile Include="mmai\io\writers.py" />
+    <Compile Include="mmai\schema\hints.py" />
+    <Compile Include="mmai\synth\csv_utils.py" />
+    <Compile Include="mmai\synth\fastq_transformer.py" />
+    <Compile Include="mmai\synth\fastq_utils.py" />
+    <Compile Include="mmai\synth\genomics.py" />
+    <Compile Include="mmai\synth\id_utils.py" />
+    <Compile Include="mmai\synth\plink_synth.py" />
+    <Compile Include="mmai\synth\plink_utils.py" />
+    <Compile Include="mmai\synth\synth_wgs_minimal.py" />
+    <Compile Include="mmai\synth\tabular.py" />
+    <Compile Include="mmai\synth\vcf_writer.py" />
+    <Compile Include="mmai\utils\io.py" />
+    <Compile Include="mmai\utils\logging.py" />
+    <Compile Include="mmai\utils\paths.py" />
+    <Compile Include="mmai\__init__.py" />
+    <Compile Include="mmai_synth.py" />
+    <Compile Include="scripts\make_schema_yaml.py" />
+    <Compile Include="scripts\synthesize_all.py" />
+    <Compile Include="tests\test_csv_utils.py" />
+    <Compile Include="tests\test_fastq_utils.py" />
+    <Compile Include="tests\test_id_utils.py" />
+    <Compile Include="tests\test_pipeline_smoke.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include="docs\mai-sdg.png" />
+    <Content Include="docs\methods.md" />
+    <Content Include="docs\privacy.md" />
+    <Content Include="mmai\schema\mmai_schema_hints.yaml" />
+    <Content Include="pyproject.toml" />
+    <Content Include="README.md" />
+    <Content Include="requirements.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="env\">
+      <Id>env</Id>
+      <Version>3.10</Version>
+      <Description>env (Python 3.10 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="mmai\" />
+    <Folder Include="mmai\io\" />
+    <Folder Include="mmai\eval\" />
+    <Folder Include="mmai\schema\" />
+    <Folder Include="mmai\synth\" />
+    <Folder Include="mmai\utils\" />
+    <Folder Include="example_data\" />
+    <Folder Include="docs\" />
+    <Folder Include="tests\" />
+    <Folder Include="scripts\" />
+    <Folder Include="synthetic_data\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>

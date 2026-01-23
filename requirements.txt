@@ -1,0 +1,28 @@
+python>=3.9
+
+# CLI / UX
+typer
+rich
+
+# Core scientific stack
+pandas
+numpy
+scipy
+scikit-learn
+matplotlib
+
+# Deep learning
+torch
+
+# Tabular synthesis
+sdv>=1.26,<2.0
+ctgan>=0.7
+copulas>=0.9
+
+# Genomics
+bed-reader
+biopython
+
+# Optional performance
+pyarrow
+typing-extensions

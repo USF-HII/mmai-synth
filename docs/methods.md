@@ -1,0 +1,122 @@
+# Methods
+
+## Overview
+
+The MAI-T1D Synthetic Data Generator is a modular, deterministic pipeline designed to produce privacy-preserving surrogate datasets derived from the TEDDY (The Environmental Determinants of Diabetes in the Young) study. The pipeline supports genome-scale genotype synthesis, optional tabular clinical and environmental data synthesis, and deterministic FASTQ filename rewriting to enable realistic multimodal workflow testing without exposing individual-level participant data.
+
+The pipeline is implemented as an orchestration layer that coordinates specialized synthesis modules while enforcing strict schema integrity, identifier consistency, and reproducible execution order.
+
+---
+
+## Input Data Modalities
+
+### Genomic Data
+
+Genotype data are ingested directly from standard PLINK files (`.bed`, `.bim`, `.fam`). Genotypes are represented as allele dosages encoded in the discrete set `{0, 1, 2}`. Variant metadata, including chromosome, base-pair position, genetic map position, and allele definitions, are read from the BIM file and preserved throughout the pipeline.
+
+### Tabular Data
+
+Optional tabular inputs include clinical phenotypes, environmental exposure variables, and derived study metadata stored as CSV files. These tables may contain participant identifiers that link records across modalities.
+
+### FASTQ Files
+
+Raw FASTQ sequencing files are treated as external artifacts. They are not synthesized at the read level. Instead, filenames are deterministically rewritten to reflect synthetic participant identifiers, enabling pipeline integration testing without altering sequencing content.
+
+---
+
+## Identifier Mapping and Cross-Modal Consistency
+
+A global identifier mapping is constructed at the start of the pipeline by scanning input CSV files for participant identifier columns. Each unique original identifier is mapped to a synthetic numeric identifier drawn from a reserved range.
+
+This mapping is propagated consistently across all synthetic outputs, including:
+- Genotype matrices
+- PLINK, PED, and VCF files
+- Synthetic CSV tables
+- FASTQ filenames
+
+This design preserves realistic cross-modal linkage while preventing re-identification of real participants.
+
+---
+
+## Genome-Scale Synthetic Genotype Generation
+
+### Preprocessing
+
+Prior to synthesis, genotype matrices undergo:
+- Validation of allele dosage encodings
+- Normalization and imputation to eliminate non-finite values
+- Truncation to a configurable number of variants (`max_snps`) to control computational cost
+
+These steps ensure numerical stability during modeling and prevent invalid encodings in downstream outputs.
+
+### Synthetic Modeling Using CopulaGAN
+
+Synthetic genotype matrices are generated using CopulaGAN, a hybrid generative model that combines Gaussian copula–based dependence modeling with adversarial learning.
+
+CopulaGAN decouples marginal distribution estimation from joint dependence modeling, allowing stable synthesis of high-dimensional, heterogeneous, and discrete data such as genotype dosages. The adversarial component improves fidelity by capturing higher-order and non-linear relationships beyond simple correlation structures.
+
+The implementation used in this pipeline is provided by the Synthetic Data Vault (SDV) framework.
+
+### Output Formats
+
+Synthetic genotypes are exported into multiple interoperable formats:
+- Binary PLINK (`.bed`, `.bim`, `.fam`)
+- PED files
+- Variant Call Format (VCF)
+- Tabular genotype matrices for modeling and quality control
+
+Strict SNP ordering and metadata alignment are enforced across all formats.
+
+---
+
+## Tabular Data Synthesis
+
+Tabular CSV synthesis is optional and explicitly gated. When enabled, each CSV table is synthesized independently using SDV-based generative models.
+
+The pipeline selects a synthesis model based on table shape:
+- CopulaGAN for moderate-dimensional tables
+- Gaussian Copula for wide or large tables to ensure stability
+
+Participant identifier columns are removed prior to modeling and re-attached afterward using the global identifier map.
+
+---
+
+## FASTQ Filename Rewriting
+
+FASTQ files are not synthesized at the nucleotide level. Instead, filenames are rewritten to replace original participant identifiers with synthetic identifiers when a mapping is available.
+
+This approach preserves:
+- Workflow realism
+- Cross-modal linkage semantics
+- Compatibility with downstream bioinformatics pipelines
+
+While avoiding the substantial technical complexity and privacy risks associated with raw read synthesis.
+
+---
+
+## Quality Control and Validation
+
+The pipeline generates automated quality control summaries, including:
+- Minor allele frequency distributions
+- Genotype count distributions
+- Missingness rates
+
+These metrics enable population-level comparison between real and synthetic data and support validation of distributional fidelity rather than subject-level correspondence.
+
+---
+
+## Intended Use
+
+Synthetic outputs generated by this pipeline are intended for:
+- Methodological development
+- Pipeline testing and benchmarking
+- Machine learning model prototyping
+- Training and demonstration workflows
+
+They are not intended for confirmatory statistical inference or clinical decision-making.
+
+---
+
+## Reproducibility
+
+The pipeline is deterministic given fixed inputs and configuration parameters. All synthesis steps are explicitly logged, and outputs are generated in a well-defined execution order to support reproducibility and auditability.
