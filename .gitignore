@@ -7,6 +7,9 @@
 *.suo
 *.userosscache
 *.sln.docstates
+*.sln
+*.pyproj
+*.toml
 
 # ----------------------
 # Python virtual envs
