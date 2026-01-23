@@ -1,12 +1,16 @@
 
-# MAI-T1D Synthetic Data Generator
-#
-# Authors:		Kenneth Young, PhD
-#				Dena Tewey, MPH
-#
-# Affiliation:	University of South Florida (USF)
-#				Morsani College of Medicine				
-#				Health Informatics Institute
+## MAI-T1D Synthetic Data Generator
+
+## Authors:		
+
+- Kenneth Young, PhD
+- Dena Tewey, MPH
+
+## Affiliation:	
+
+University of South Florida (USF)  
+Morsani College of Medicine  
+Health Informatics Institute  
 
 ---
 ## Overview
@@ -84,6 +88,8 @@ control procedures, and supporting literature are provided in:
 
 ```bash
 pip install -r requirements.txt
+```
+---
 
 ## License
 
