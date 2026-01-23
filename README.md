@@ -89,7 +89,7 @@ pip install -r requirements.txt
 
 MIT License
 
-Copyright (c) 2026 Kenneth Young
+Copyright (c) 2026 Kenneth Young, PhD and Dena Tewey, MPH
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
