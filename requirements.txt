@@ -26,3 +26,4 @@ biopython
 # Optional performance
 pyarrow
 typing-extensions
+
