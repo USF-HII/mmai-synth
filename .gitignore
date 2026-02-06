@@ -37,7 +37,13 @@ build/
 Thumbs.db
 
 
-# Data
-example_data/
-synthetic_data/
-synthetic_data/*.tmp
+# ----------------------
+# Data Folders
+# ----------------------
+# Ignore everything inside example_data
+example_data/*
+!example_data/.gitkeep
+
+# Ignore everything inside synthetic_data
+synthetic_data/*
+!synthetic_data/.gitkeep

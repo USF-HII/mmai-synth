@@ -15,6 +15,7 @@ This ensures deterministic behavior across:
 
 Author: Kenneth Young, PhD
         Dena Tewey, MPH
+
 Affiliation: USF Health Informatics Institute
 """
 
