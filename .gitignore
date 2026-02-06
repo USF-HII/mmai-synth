@@ -42,8 +42,10 @@ Thumbs.db
 # ----------------------
 # Ignore everything inside example_data
 example_data/*
+# But keep the directory itself
 !example_data/.gitkeep
 
 # Ignore everything inside synthetic_data
 synthetic_data/*
+# But keep the directory itself
 !synthetic_data/.gitkeep

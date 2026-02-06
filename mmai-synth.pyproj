@@ -61,10 +61,12 @@
     <Content Include="docs\mai-sdg.png" />
     <Content Include="docs\methods.md" />
     <Content Include="docs\privacy.md" />
+    <Content Include="example_data\empty.gitkeep" />
     <Content Include="mmai\schema\mmai_schema_hints.yaml" />
     <Content Include="pyproject.toml" />
     <Content Include="README.md" />
     <Content Include="requirements.txt" />
+    <Content Include="synthetic_data\empty.gitkeep" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">
