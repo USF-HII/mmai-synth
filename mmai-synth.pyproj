@@ -39,6 +39,7 @@
     <Compile Include="mmai\synth\fastq_utils.py" />
     <Compile Include="mmai\synth\genomics.py" />
     <Compile Include="mmai\synth\id_utils.py" />
+    <Compile Include="mmai\synth\plink_fam_utils.py" />
     <Compile Include="mmai\synth\plink_synth.py" />
     <Compile Include="mmai\synth\plink_utils.py" />
     <Compile Include="mmai\synth\synth_wgs_minimal.py" />
@@ -61,7 +62,9 @@
     <Content Include="docs\mai-sdg.png" />
     <Content Include="docs\methods.md" />
     <Content Include="docs\privacy.md" />
-    <Content Include="example_data\empty.gitkeep" />
+    <Content Include="example_data\empty.gitkeep">
+      <Publish>False</Publish>
+    </Content>
     <Content Include="mmai\schema\mmai_schema_hints.yaml" />
     <Content Include="pyproject.toml" />
     <Content Include="README.md" />

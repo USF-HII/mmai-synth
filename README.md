@@ -39,6 +39,10 @@ environmental data synthesis, and cross-modal linkage validation.
 
 Execution is deterministic and phase-gated.
 
+- synthetic_data/
+    synthetic_id_map.csv   # canonical cumulative map
+    run_YYYYMMDD_HHMMSS/   # snapshot per execution
+
 ---
 ## Genomic Data Handling
 
@@ -47,6 +51,21 @@ genotype matrices preserve allele dosage encodings and variant metadata, includi
 chromosome, position, and allele definitions. SNP ordering is explicitly enforced
 across all outputs, including PLINK, VCF, PED, and tabular genotype matrices, ensuring
 compatibility with standard population genetics and association analysis workflows.
+
+## WGS Synthesis 
+
+- BIM is preserved from source PLINK input
+- FAM is authoritative and derived from masked IDs
+- No dummy PLINK IDs are generated
+- Synthetic IIDs are reserved within 100000–199999
+- Family IDs are masked as FAM000001...
+- PED uses FAM metadata (not default placeholders)
+- VCF contains GT-only minimal representation
+- synthetic_id_map.csv is updated deterministically
+
+- --max-snps truncates the genotype matrix and BIM consistently.
+All downstream outputs (PLINK, PED, VCF, QC, matrix) reflect the truncated SNP set.
+
 
 ## FASTQ Files
 

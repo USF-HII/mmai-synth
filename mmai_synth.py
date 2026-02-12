@@ -27,42 +27,23 @@ def run_synthetic_pipeline(
     input_dir: str = "example_data",
     output_dir: str = "synthetic_data",
     synth_wgs_minimal: bool = True,
-    process_csvs: bool = True,
-    process_fastq: bool = True,
+    process_csvs: bool = False,
+    process_fastq: bool = False,
 ):
-    """
-    Run the MAI-T1D synthetic data pipeline programmatically.
-
-    Parameters
-    ----------
-    input_dir : str
-        Directory containing source CSV, PLINK, and FASTQ data.
-    output_dir : str
-        Directory where synthetic outputs will be written.
-    synth_wgs_minimal : bool
-        Whether to run genome-scale WGS synthesis.
-    process_csvs : bool
-        Whether to run CSV table synthesis.
-    process_fastq : bool
-        Whether to rename FASTQ files using the synthetic ID map.
-    """
-
     args = parse_args()
 
-    # Override CLI defaults
-    
+    # INPUT detection for example CSVs
     args.id_col_hint = "maskid"
+
+    # OUTPUT canonical ID column name
     args.id_col_name = "MAI_T1D_maskid"
+
     args.input = str(Path(input_dir).resolve())
     args.output = str(Path(output_dir).resolve())
+
     args.synth_wgs_minimal = synth_wgs_minimal
     args.process_csvs = process_csvs
     args.process_fastq = process_fastq
-    
-
-    # Sensible defaults for WGS-focused runs
-    if synth_wgs_minimal:
-        args.no_plink = True
 
     run_pipeline(args)
 
