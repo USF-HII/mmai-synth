@@ -1,25 +1,27 @@
 
-## MAI-T1D Synthetic Data Generator
+## MAI-T1D Synthetic Data Generation Framework
+
+Privacy-Preserving Infrastructure for Multimodal AI in Type 1 Diabetes Research
+
+The MAI-T1D Synthetic Data Generation Framework serves as a core enabling infrastructure for the NIH-funded Multimodal AI for Type 1 Diabetes (MAI-T1D) collaborative project. Developed within the consortium and released as open-source software, the framework supports privacy-preserving analytic development across institutions while maintaining strict separation from protected participant data. Recent development efforts have focused on genomic synthesis components, with continued expansion to additional modalities.
 
 ## Authors:		
+- Kenneth Young, PhD (USF)
+- Dena Tewey, MPH (USF)
 
-- Kenneth Young, PhD
-- Dena Tewey, MPH
-
-## Affiliation:	
-
-University of South Florida (USF)  
-Morsani College of Medicine  
-Health Informatics Institute  
+## The MAI-T1D consortium includes investigators from:	
+- University of Michigan
+- UCLA
+- Vanderbilt University
+- Weill Cornell Medicine
+- University of South Florida (USF)
 
 ---
 ## Overview
 
-This repository contains the synthetic data generation pipeline developed for
+The framework is implemented as a modular, phase-gated pipeline designed for reproducibility, traceability, and interoperability. Execution proceeds through configurable stages so that genomic, tabular, and sequencing-related components can be synthesized independently or jointly. This repository contains the synthetic data generation pipeline developed for
 the MAI-T1D project using data from the TEDDY (The Environmental Determinants of
-Diabetes in the Young) study.
-
-The pipeline produces privacy-preserving synthetic datasets that retain the
+Diabetes in the Young) study. The pipeline produces privacy-preserving synthetic datasets that retain the
 statistical and structural properties of the original data while preventing
 re-identification of study participants.
 
@@ -38,10 +40,10 @@ environmental data synthesis, and cross-modal linkage validation.
 - Cross-modal linkage is enabled through a global synthetic ID map
 
 Execution is deterministic and phase-gated.
-
+- example_data/                # directory for input data
 - synthetic_data/
-    synthetic_id_map.csv   # canonical cumulative map
-    run_YYYYMMDD_HHMMSS/   # snapshot per execution
+    - synthetic_id_map.csv       # canonical cumulative map
+    - run_YYYYMMDD_HHMMSS/       # snapshot per execution
 
 ---
 ## Genomic Data Handling
@@ -57,7 +59,7 @@ compatibility with standard population genetics and association analysis workflo
 - BIM is preserved from source PLINK input
 - FAM is authoritative and derived from masked IDs
 - No dummy PLINK IDs are generated
-- Synthetic IIDs are reserved within 100000–199999
+- Synthetic IIDs are reserved within 100000â€“199999
 - Family IDs are masked as FAM000001...
 - PED uses FAM metadata (not default placeholders)
 - VCF contains GT-only minimal representation
