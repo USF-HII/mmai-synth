@@ -55,6 +55,9 @@ across all outputs, including PLINK, VCF, PED, and tabular genotype matrices, en
 compatibility with standard population genetics and association analysis workflows.
 
 ## WGS Synthesis 
+Genotype data are ingested in standard PLINK binary format, consisting of BED, BIM, and FAM files. Variant metadata such as chromosome, base-pair position, genetic map position, and allele definitions are preserved and explicitly aligned with genotype matrices throughout the pipeline. Schema invariants are enforced to ensure consistent SNP ordering across all output formats.
+
+Synthetic genotype matrices are generated using Gaussian Copula modeling implemented through the Synthetic Data Vault framework. This approach provides robust modeling of allele frequencies and multivariate dependencies (such as linkage disequilibrium and population structure), which is well suited to discrete dosage values in high-dimensional genomic data. Adversarial models such as CopulaGAN or CTGAN are supported within the framework for tabular and clinical data synthesis, while Gaussian Copula remains the stable default for genotype matrices. PLINK binary outputs are generated deterministically to preserve interoperability. Variant metadata in the BIM file are retained directly from the source dataset, including chromosome codes, positions, and allele definitions. Synthetic genotype matrices are sampled and normalized to valid dosage states {0,1,2}, and the FAM file is reconstructed using deterministically mapped synthetic identifiers with consistent sex assignment. Outputs include PLINK binary (BED/BIM/FAM), PED, tabular genotype matrix, and VCF formats, with explicit alignment checks ensuring direct compatibility with tools such as PLINK, Hail, or GCTA. Synthetic participant identifiers are assigned deterministically within a reserved numeric range (typically 100000 to 199999) and tracked through a cumulative mapping file to ensure consistent linkage across all generated modalities.
 
 - BIM is preserved from source PLINK input
 - FAM is authoritative and derived from masked IDs
@@ -79,6 +82,10 @@ data synthesis.
 
 Synthetic genotype and phenotype data provide the primary analytic substrate, while
 FASTQ renaming supports integration testing and pipeline validation.
+
+## Cross-Modal Integration and Sequencing Support
+A shared synthetic identifier namespace links genomic and clinical outputs consistently across modalities. For sequencing workflows, FASTQ files are not regenerated synthetically. Instead, filenames are deterministically remapped to synthetic participant identifiers. This approach supports end-to-end workflow validation while avoiding the technical and privacy complexities associated with synthetic read-level generation. The pipeline executes deterministically and can produce intermediate artifacts for auditing and reproducibility when required.
+
 
 ## Additional Documentation
 
